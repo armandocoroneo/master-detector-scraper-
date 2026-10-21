@@ -3,11 +3,11 @@
 Bienvenido al monitor automatizado de precios de **Master Detector**. Este reporte se genera recolectando información de las distintas sucursales de la región.
 
 ## 🇧🇴 Sucursal Bolivia (Última Actualización)
-Aquí se mostrarán los equipos destacados de la sede central y sucursales bolivianas.
+Aquí se muestran los equipos destacados de la sede central y sucursales bolivianas.
 
-| 🛒 Producto | 💵 Precio Mínimo | 📈 Precio Máximo | 📍 Origen |
-| :--- | :--- | :--- | :--- |
-| *Esperando datos del script...* | - | - | - |
+| 🛒 Producto | 💵 Precio / Estado | 📍 Origen |
+| :--- | :--- | :--- |
+| No se pudieron recopilar datos en esta ejecución | - | - |
 
 ## 🌎 Comparativa Regional (Próximamente)
 *   🇵🇪 Perú
@@ -16,4 +16,3 @@ Aquí se mostrarán los equipos destacados de la sede central y sucursales boliv
 
 ---
 *Herramienta de código abierto desarrollada en Python y desplegada en GitHub Pages.*
-
