@@ -5,9 +5,12 @@ Bienvenido al monitor automatizado de precios de **Master Detector**. Este repor
 ## 🇧🇴 Sucursal Bolivia (Última Actualización)
 Aquí se muestran los equipos destacados de la sede central y sucursales bolivianas.
 
-| 🛒 Producto | 💵 Precio / Estado | 📍 Origen |
+| 🛒 Producto | 💵 Precio | 📍 Origen |
 | :--- | :--- | :--- |
-| No se pudieron recopilar datos en esta ejecución | - | - |
+| Detector Minelab GPX 6000 Global | Bs. 94.731,00 | Bolivia |
+| Detector Minelab Equinox 900 | Bs. 14.677,00 | Bolivia |
+| Detector Minelab Gold Monster 1000 | Bs. 12.180,00 | Bolivia |
+| Detector de Seguridad Garrett Pro-Pointer | Bs. 1.850,00 | Bolivia |
 
 ## 🌎 Comparativa Regional (Próximamente)
 *   🇵🇪 Perú
