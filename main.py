@@ -44,7 +44,7 @@ def extraer_datos_peru(tasas):
         {"nombre": "Detector Minelab Gold Monster 1000", "precio_reg": 5400.00},
         {"nombre": "Detector de Seguridad Garrett Pro-Pointer", "precio_reg": 850.00}
     ]
-    
+    s
     productos = []
     for eq in equipos:
         usd = eq["precio_reg"] / tasas["PEN"]
