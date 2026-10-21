@@ -4,6 +4,8 @@ on:
   workflow_dispatch: # Te permite activarlo manualmente con un botón cuando quieras
   schedule:
     # Se ejecuta todos los días a las 11:00 UTC 
+      schedule:
+    # Se ejecuta todos los días a las 11:00 UTC
     # (7:00 AM de Bolivia / 6:00 AM de Perú)
     - cron: '0 11 * * *'
 
