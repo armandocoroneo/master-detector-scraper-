@@ -3,7 +3,6 @@ import requests
 
 def obtener_tasas_cambio():
     print("Consultando tipos de cambio oficiales del día...")
-    # URL real de la API gratuita de ExchangeRate-API
     url = "https://er-api.com"
     try:
         response = requests.get(url, timeout=10)
@@ -12,7 +11,7 @@ def obtener_tasas_cambio():
             rates = datos.get("rates", {})
             bob = rates.get("BOB", 6.91)
             pen = rates.get("PEN", 3.75)
-            ars = rates.get("ARS", 1000.00) # Tasa base para Argentina
+            ars = rates.get("ARS", 1000.00)
             print(f"Tasas obtenidas -> USD/BOB: {bob} | USD/PEN: {pen} | USD/ARS: {ars}")
             return {"BOB": bob, "PEN": pen, "ARS": ars}
     except Exception as e:
@@ -25,7 +24,7 @@ def extraer_datos_bolivia(tasas):
     equipos = [
         {"nombre": "Detector Minelab GPX 6000 Global", "precio_reg": 94731.00, "origen": "Bolivia", "moneda": "Bs."},
         {"nombre": "Detector Minelab Equinox 900", "precio_reg": 14677.00, "origen": "Bolivia", "moneda": "Bs."},
-        {"nombre": "Detector Minelab Gold Monster 1000", "precio_reg": 12180.00, "origen": "Bolivia", "moneda": "Bs."},
+        {"nombre": "Detector Minelab Gold Monster 1000", "precio_reg": 14027.00, "origen": "Bolivia", "moneda": "Bs."},
         {"nombre": "Detector de Seguridad Garrett Pro-Pointer", "precio_reg": 1850.00, "origen": "Bolivia", "moneda": "Bs."}
     ]
     for equipo in equipos:
@@ -48,7 +47,6 @@ def extraer_datos_peru(tasas):
 def extraer_datos_argentina(tasas):
     print("Procesando datos de Master Detector Argentina...")
     tasa_ars = tasas.get("ARS", 1000.00)
-    # Lista de precios simulada/base para Argentina en Pesos Argentinos
     equipos = [
         {"nombre": "Detector Minelab GPX 6000 Global", "precio_reg": 14000000.00, "origen": "Argentina", "moneda": "$ Ar."},
         {"nombre": "Detector Minelab Equinox 900", "precio_reg": 2200000.00, "origen": "Argentina", "moneda": "$ Ar."},
@@ -61,8 +59,6 @@ def extraer_datos_argentina(tasas):
 
 def generar_html(lista_completa):
     print("Generando archivo index.html...")
-    
-    # Marcador de fecha de actualización para el pie de página
     fecha_actualizacion = time.strftime("%d/%m/%Y %H:%M:%S")
     
     filas_tabla = ""
@@ -90,13 +86,20 @@ def generar_html(lista_completa):
         .table-dark th {{ color: #ffc107; }}
         .card {{ background-color: #1e1e1e; border: 1px solid #333; }}
         .text-success {{ color: #2ecc71 !important; font-weight: bold; }}
+        .btn-warning {{ font-weight: 600; color: #111; }}
+        .btn-outline-light {{ font-size: 0.9rem; }}
     </style>
 </head>
 <body>
 
     <nav class="navbar navbar-dark mb-4">
-        <div class="container text-center">
-            <span class="navbar-brand mb-0 h1 mx-auto">🌏 Master Detector - Monitor de Precios Sudamérica</span>
+        <div class="container d-flex justify-content-between align-items-center">
+            <span class="navbar-brand mb-0 h1">🌏 Master Detector - Monitor Regional</span>
+            <div class="d-flex gap-2">
+                <a href="https://masterdetector.com.bo/" target="_blank" class="btn btn-sm btn-warning">🇧🇴 Tienda Bolivia</a>
+                <a href="https://masterdetector.pe" target="_blank" class="btn btn-sm btn-outline-light">🇵🇪 Tienda Perú</a>
+                <a href="https://masterdetector.com.ar" target="_blank" class="btn btn-sm btn-outline-light">🇦🇷 Tienda Argentina</a>
+            </div>
         </div>
     </nav>
 
@@ -125,7 +128,7 @@ def generar_html(lista_completa):
         </div>
 
         <footer class="mt-5 mb-4 text-center text-muted">
-            <p>© Próximas Sucursales | Última actualización del Bot: {fecha_actualizacion}</p>
+            <p>© Monitores Master Detector | Última actualización del Bot: {fecha_actualizacion}</p>
         </footer>
     </div>
 
@@ -138,14 +141,9 @@ def generar_html(lista_completa):
 
 if __name__ == "__main__":
     tasas = obtener_tasas_cambio()
-    
-    # Extraer datos de todos los países
     equipos_bo = extraer_datos_bolivia(tasas)
     equipos_pe = extraer_datos_peru(tasas)
     equipos_ar = extraer_datos_argentina(tasas)
     
-    # Unificar todas las listas en una sola gran tabla
     lista_total = equipos_bo + equipos_pe + equipos_ar
-    
-    # Compilar el archivo web final
     generar_html(lista_total)
