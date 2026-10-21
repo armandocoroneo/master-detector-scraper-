@@ -22,10 +22,10 @@ def extraer_datos_bolivia(tasas):
     print("Procesando datos de Master Detector Bolivia...")
     tasa_bob = tasas.get("BOB", 6.91)
     equipos = [
-        {"nombre": "Detector Minelab GPX 6000 Global", "precio_reg": 94731.00, "origen": "Bolivia", "moneda": "Bs."},
-        {"nombre": "Detector Minelab Equinox 900", "precio_reg": 14677.00, "origen": "Bolivia", "moneda": "Bs."},
-        {"nombre": "Detector Minelab Gold Monster 1000", "precio_reg": 14027.00, "origen": "Bolivia", "moneda": "Bs."},
-        {"nombre": "Detector de Seguridad Garrett Pro-Pointer", "precio_reg": 1850.00, "origen": "Bolivia", "moneda": "Bs."}
+        {"nombre": "Detector Minelab GPX 6000 Global", "precio_reg": 94731, "origen": "Bolivia", "moneda": "Bs."},
+        {"nombre": "Detector Minelab Equinox 900", "precio_reg": 14677, "origen": "Bolivia", "moneda": "Bs."},
+        {"nombre": "Detector Minelab Gold Monster 1000", "precio_reg": 14027, "origen": "Bolivia", "moneda": "Bs."},
+        {"nombre": "Detector de Seguridad Garrett Pro-Pointer", "precio_reg": 1850, "origen": "Bolivia", "moneda": "Bs."}
     ]
     for equipo in equipos:
         equipo["precio_usd"] = round(equipo["precio_reg"] / tasa_bob, 2)
@@ -35,10 +35,10 @@ def extraer_datos_peru(tasas):
     print("Procesando datos de Master Detector Perú...")
     tasa_pen = tasas.get("PEN", 3.75)
     equipos = [
-        {"nombre": "Detector Minelab GPX 6000 Global", "precio_reg": 42500.00, "origen": "Perú", "moneda": "S/."},
-        {"nombre": "Detector Minelab Equinox 900", "precio_reg": 6800.00, "origen": "Perú", "moneda": "S/."},
-        {"nombre": "Detector Minelab Gold Monster 1000", "precio_reg": 5400.00, "origen": "Perú", "moneda": "S/."},
-        {"nombre": "Detector de Seguridad Garrett Pro-Pointer", "precio_reg": 850.00, "origen": "Perú", "moneda": "S/."}
+        {"nombre": "Detector Minelab GPX 6000 Global", "precio_reg": 42500, "origen": "Perú", "moneda": "S/."},
+        {"nombre": "Detector Minelab Equinox 900", "precio_reg": 6800, "origen": "Perú", "moneda": "S/."},
+        {"nombre": "Detector Minelab Gold Monster 1000", "precio_reg": 5400, "origen": "Perú", "moneda": "S/."},
+        {"nombre": "Detector de Seguridad Garrett Pro-Pointer", "precio_reg": 850, "origen": "Perú", "moneda": "S/."}
     ]
     for equipo in equipos:
         equipo["precio_usd"] = round(equipo["precio_reg"] / tasa_pen, 2)
@@ -48,10 +48,10 @@ def extraer_datos_argentina(tasas):
     print("Procesando datos de Master Detector Argentina...")
     tasa_ars = tasas.get("ARS", 1000.00)
     equipos = [
-        {"nombre": "Detector Minelab GPX 6000 Global", "precio_reg": 14000000.00, "origen": "Argentina", "moneda": "$ Ar."},
-        {"nombre": "Detector Minelab Equinox 900", "precio_reg": 2200000.00, "origen": "Argentina", "moneda": "$ Ar."},
-        {"nombre": "Detector Minelab Gold Monster 1000", "precio_reg": 1800000.00, "origen": "Argentina", "moneda": "$ Ar."},
-        {"nombre": "Detector de Seguridad Garrett Pro-Pointer", "precio_reg": 270000.00, "origen": "Argentina", "moneda": "$ Ar."}
+        {"nombre": "Detector Minelab GPX 6000 Global", "precio_reg": 14000000, "origen": "Argentina", "moneda": "$ Ar."},
+        {"nombre": "Detector Minelab Equinox 900", "precio_reg": 2200000, "origen": "Argentina", "moneda": "$ Ar."},
+        {"nombre": "Detector Minelab Gold Monster 1000", "precio_reg": 1800000, "origen": "Argentina", "moneda": "$ Ar."},
+        {"nombre": "Detector de Seguridad Garrett Pro-Pointer", "precio_reg": 270000, "origen": "Argentina", "moneda": "$ Ar."}
     ]
     for equipo in equipos:
         equipo["precio_usd"] = round(equipo["precio_reg"] / tasa_ars, 2)
@@ -63,11 +63,13 @@ def generar_html(lista_completa):
     
     filas_tabla = ""
     for equipo in lista_completa:
+        # Formateamos el precio como entero sin decimales .0
+        precio_local_formateado = f"{int(equipo['precio_reg']):,}"
         filas_tabla += f"""
         <tr>
             <td>{equipo['nombre']}</td>
-            <td>{equipo['moneda']} {equipo['precio_reg']:,}</td>
-            <td class="text-success">${equipo['precio_usd']:,} USD</td>
+            <td>{equipo['moneda']} {precio_local_formateado}</td>
+            <td class="text-success">${equipo['precio_usd']:,.2f} USD</td>
             <td>{equipo['origen']}</td>
         </tr>
         """
@@ -81,27 +83,31 @@ def generar_html(lista_completa):
     <link href="https://jsdelivr.net" rel="stylesheet">
     <style>
         body {{ background-color: #121212; color: #e0e0e0; font-family: 'Segoe UI', Arial, sans-serif; }}
-        .navbar {{ background-color: #1f1f1f; border-bottom: 2px solid #ffc107; }}
+        .navbar {{ background-color: #1f1f1f; border-bottom: 2px solid #ffc107; padding: 15px 0; }}
         .table-dark {{ background-color: #1e1e1e; }}
         .table-dark th {{ color: #ffc107; }}
         .card {{ background-color: #1e1e1e; border: 1px solid #333; }}
         .text-success {{ color: #2ecc71 !important; font-weight: bold; }}
-        .btn-warning {{ font-weight: 600; color: #111; }}
-        .btn-outline-light {{ font-size: 0.9rem; }}
+        .enlaces-tiendas a {{ 
+            color: #ffc107; 
+            text-decoration: none; 
+            margin-left: 15px; 
+            font-weight: bold;
+            font-size: 0.95rem;
+        }}
+        .enlaces-tiendas a:hover {{ text-decoration: underline; color: #fff; }}
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-dark mb-4">
-        <div class="container d-flex justify-content-between align-items-center">
-            <span class="navbar-brand mb-0 h1">🌏 Master Detector - Monitor Regional</span>
-            <div class="d-flex gap-2">
-                <a href="https://masterdetector.com.bo/" target="_blank" class="btn btn-sm btn-warning">🇧🇴 Tienda Bolivia</a>
-                <a href="https://masterdetector.pe" target="_blank" class="btn btn-sm btn-outline-light">🇵🇪 Tienda Perú</a>
-                <a href="https://masterdetector.com.ar" target="_blank" class="btn btn-sm btn-outline-light">🇦🇷 Tienda Argentina</a>
-            </div>
+        <div style="background-color: #1f1f1f; border-bottom: 2px solid #ffc107; padding: 15px; display: flex; justify-content: space-between; align-items: center; font-family: sans-serif; margin-bottom: 20px;">
+        <span style="color: #ffffff; font-size: 1.25rem; font-weight: bold;">🌏 Master Detector - Monitor Regional</span>
+        <div style="display: flex; gap: 15px;">
+            <a href="https://masterdetector.com.bo" target="_blank" style="color: #ffc107; text-decoration: none; font-weight: bold;">🇧🇴 Tienda Bolivia</a>
+            <a href="https://masterdetector.pe" target="_blank" style="color: #ffc107; text-decoration: none; font-weight: bold;">🇵🇪 Tienda Perú</a>
+            <a href="https://masterdetector.com.ar" target="_blank" style="color: #ffc107; text-decoration: none; font-weight: bold;">🇦🇷 Tienda Argentina</a>
         </div>
-    </nav>
+    </div>
 
     <div class="container">
         <div class="p-3 mb-4 rounded card">
@@ -128,7 +134,7 @@ def generar_html(lista_completa):
         </div>
 
         <footer class="mt-5 mb-4 text-center text-muted">
-            <p>© Monitores Master Detector | Última actualización del Bot: {fecha_actualizacion}</p>
+            <p>© Monitores Master Detector | Última actualización: {fecha_actualizacion}</p>
         </footer>
     </div>
 
