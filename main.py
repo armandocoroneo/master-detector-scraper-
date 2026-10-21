@@ -144,3 +144,4 @@ if __name__ == "__main__":
     datos_pe = extraer_datos_peru(tasas)
     todo = datos_bo + datos_pe
     generar_reporte_html(todo)
+
